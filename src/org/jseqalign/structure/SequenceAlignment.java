@@ -14,49 +14,46 @@ public class SequenceAlignment implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * Primeira sequência da comparação já com os gaps necessários para o
-     * alinhamento.
+     * First sequence of the alignment, with gaps needed for presentation.
      */
     protected String firstSequenceWithGaps;
 
     /**
-     * Linha descritiva do resultado do alinhamento entre a sequência 1 e a
-     * sequência 2.
+     * The descriptive line of the alignment between the two sequences.
      */
     protected String alignmentDescriptiveLine;
 
     /**
-     * Segunda sequência da comparação já com os gaps necessários para o
-     * alinhamento.
+     * Second sequence of the alignment, with gaps needed for presentation.
      */
     protected String secondSequenceWithGaps;
 
     /**
-     * Pontuação apurada para o alinhamento entre as sequencias.
+     * Computed score of the alignment between the sequences.
      */
     protected int score;
 
     /**
-     * Constrói um objeto do tipo <CODE>AlinhamentoDeSequencias</CODE>
-     * inicializando todos os atributos.
+     * Builds an object of type <CODE>SequenceAlignment</CODE> initializing all
+     * the fields.
      *
      * @param firstSequenceWithGaps
      * @param secondSequenceWithGaps
      * @param alignmentDescriptiveLine
-     * @param pontuacao
+     * @param score
      */
     public SequenceAlignment(String firstSequenceWithGaps,
             String alignmentDescriptiveLine, String secondSequenceWithGaps,
-            int pontuacao) {
+            int score) {
         this.firstSequenceWithGaps = firstSequenceWithGaps;
         this.alignmentDescriptiveLine = alignmentDescriptiveLine;
         this.secondSequenceWithGaps = secondSequenceWithGaps;
-        this.score = pontuacao;
+        this.score = score;
     }
 
     /**
-     * Retorna a sequência 1 com os gaps necessários para o alinhamento com a
-     * sequência 2.
+     * Returns the first sequence already with gaps for alignment with the 
+     * second sequence.
      *
      * @return
      */
@@ -65,8 +62,7 @@ public class SequenceAlignment implements Serializable {
     }
 
     /**
-     * Retorna a linha descritiva do resultado do alinhamento entre as
-     * sequências.
+     * Returns the descriptive line of the alignment between the two sequences.
      *
      * @return
      */
@@ -75,8 +71,8 @@ public class SequenceAlignment implements Serializable {
     }
 
     /**
-     * Retorna a sequência 2 com os gaps necessários para o alinhamento com a
-     * sequência 1.
+     * Returns the second sequence already with gaps for alignment with the 
+     * second sequence.
      *
      * @return
      */
@@ -85,7 +81,7 @@ public class SequenceAlignment implements Serializable {
     }
 
     /**
-     * Retorna a pontuação apurada para o alinhamento entre as sequências.
+     * Returns the computed score for the alignment.
      *
      * @return
      */
@@ -94,7 +90,8 @@ public class SequenceAlignment implements Serializable {
     }
 
     /**
-     * Retorna uma representação textual do resultado do alinhamento.
+     * Returns a string representing the sequence alignment result.
+     * @return String representation of the sequence alignment.
      */
     @Override
     public String toString() {
@@ -103,9 +100,9 @@ public class SequenceAlignment implements Serializable {
     }
 
     /**
-     *
-     * @return <CODE>true</CODE> caso a instância do alinhamento seja igual ao
-     * objeto comparado.
+     * 
+     * @return <CODE>true</CODE> if the alignment instance is equal to the
+     * compared object.
      */
     @Override
     public boolean equals(Object obj) {
@@ -113,21 +110,21 @@ public class SequenceAlignment implements Serializable {
             return false;
         }
 
-        SequenceAlignment outroAlinhamento = (SequenceAlignment) obj;
+        SequenceAlignment otherAlignment = (SequenceAlignment) obj;
 
-        if (this.score != outroAlinhamento.score) {
+        if (this.score != otherAlignment.score) {
             return false;
         }
 
-        if (!this.firstSequenceWithGaps.equals(outroAlinhamento.firstSequenceWithGaps)) {
+        if (!this.firstSequenceWithGaps.equals(otherAlignment.firstSequenceWithGaps)) {
             return false;
         }
 
-        if (!this.alignmentDescriptiveLine.equals(outroAlinhamento.alignmentDescriptiveLine)) {
+        if (!this.alignmentDescriptiveLine.equals(otherAlignment.alignmentDescriptiveLine)) {
             return false;
         }
 
-        return this.secondSequenceWithGaps.equals(outroAlinhamento.secondSequenceWithGaps);
+        return this.secondSequenceWithGaps.equals(otherAlignment.secondSequenceWithGaps);
     }
 
     @Override

@@ -264,19 +264,19 @@ public class NeedlemanWunschAlgorithm extends SequenceAlignmentAlgorithm {
         columns = secondSequence.length() + 1;
 
         if (lines <= columns) {
-            // a matriz será percorrida a partir das colunas
+            // the matrix will be traversed starting from the columns
             array = new int[lines];
 
-            // percorre a primeira coluna
+            // traverses the first column
             array[0] = 0;
             for (line = 1; line < lines; line++) {
                 array[line] = array[line - 1] + removalScore(firstSequence.charAt(line));
             }
 
-            // processa a computationMatrix de similaridades coluna a coluna
-            // o array contém apenas uma coluna em cada iteração
+            // computes the similarity matrix column by column
+            // the array will have only one column in each iteration
             for (column = 1; column < columns; column++) {
-                // processa a primeira linha, a variável tmp irá armazenar os valores que deverão ser movidos mais tarde pro array
+                // process the first line, temp will store the values to be moved to the array
                 temp = array[0] + insertionScore(secondSequence.charAt(column));
 
                 for (line = 1; line < lines; line++) {
@@ -286,33 +286,33 @@ public class NeedlemanWunschAlgorithm extends SequenceAlignmentAlgorithm {
                                     secondSequence.charAt(column));
                     rem = temp + removalScore(firstSequence.charAt(line));
 
-                    // copia o valor de tmp para o array
+                    // copies the value in temp to the array
                     array[line - 1] = temp;
 
-                    // passa a maior pontuação entre inserção, substituição e remoção para tmp
+                    // passes the higher score between intersection, substitution and deletion to temp
                     temp = max(ins, sub, rem);
                 }
 
-                // passa o valor de tmp para o array
+                // put the value of tmp into the array
                 array[lines - 1] = temp;
             }
 
             return array[lines - 1];
         } else {
-            // a matrix será percorrida com referência nas linhas
+            // the matrix will be traversed based on the lines
             array = new int[columns];
 
-            // preenche a primeira linha
+            // fills the first line
             array[0] = 0;
             for (column = 1; column < columns; column++) {
                 array[column] = array[column - 1]
                         + insertionScore(secondSequence.charAt(column));
             }
 
-            // processa a matriz de similaridades linha a linha
-            // o array contém apenas uma linha em cada iteração
+            // process the similarity matrix line by line
+            // th earray will have only one line in each iteration
             for (line = 1; line < lines; line++) {
-                // processa a primeira linha, a variável tmp irá armazenar os valores que deverão ser movidos mais tarde pro array
+                // process the first line, tem will have the value to be moved to the array later
                 temp = array[0] + removalScore(firstSequence.charAt(line));
 
                 for (column = 1; column < columns; column++) {
@@ -322,14 +322,14 @@ public class NeedlemanWunschAlgorithm extends SequenceAlignmentAlgorithm {
                                     secondSequence.charAt(column));
                     rem = array[column] + removalScore(firstSequence.charAt(line));
 
-                    // copia o valor de tmp para o array
+                    // put the value of temp into the array
                     array[column - 1] = temp;
 
-                    // passa a maior pontuação entre inserção, substituição e remoção para tmp
+                    // put the higher score between intersection, substitution and deletion into temp
                     temp = max(ins, sub, rem);
                 }
 
-                // passa o valor de tmp para o array
+                // put the value of temp into the array
                 array[columns - 1] = temp;
             }
 
